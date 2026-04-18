@@ -1,8 +1,12 @@
+<div align="center">
+
 # s3flow
 
-[npm version](https://www.npmjs.com/package/s3flow)
-[Node.js](https://nodejs.org/)
-[License: MIT](https://github.com/ashishviradiya/s3flow/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/s3flow?style=flat-square&logo=npm&label=npm)](https://www.npmjs.com/package/s3flow)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18.18-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square&logo=opensourceinitiative&logoColor=white)](https://github.com/ashishviradiya/s3flow/blob/main/LICENSE)
+
+</div>
 
 **s3flow** is a Node.js library for **streaming an Amazon S3 prefix into a ZIP, tar, or tar.gz archive** with paginated listing, `GetObject` as byte streams, and `**stream/promises.pipeline`\*\* so backpressure propagates end to end. It is built for production workloads: retries, checkpoints, optional multipart upload of the archive back to S3, NDJSON prepared indexes, metrics (including Prometheus), and a small CLI.
 
