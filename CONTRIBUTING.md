@@ -44,5 +44,5 @@ Other useful commands:
 
 ## Questions and bugs
 
-- **Questions or feature ideas:** open a [GitHub issue](https://github.com/ashishviradiya/s3flow/issues) (update the URL if the repository moves).
+- **Questions or feature ideas:** open a [GitHub issue](https://github.com/AshishViradiya153/s3flow/issues) (update the URL if the repository moves).
 - **Security issues:** do **not** open a public issue; see [SECURITY.md](SECURITY.md).

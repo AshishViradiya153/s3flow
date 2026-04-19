@@ -3,9 +3,9 @@
 # s3flow
 
 [![npm version](https://img.shields.io/npm/v/s3flow?style=flat-square&logo=npm&label=npm)](https://www.npmjs.com/package/s3flow)
-[![CI](https://github.com/ashishviradiya/s3flow/actions/workflows/ci.yml/badge.svg)](https://github.com/ashishviradiya/s3flow/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/AshishViradiya153/s3flow/ci.yml?branch=main&logo=github&label=CI&style=flat-square)](https://github.com/AshishViradiya153/s3flow/actions/workflows/ci.yml?query=branch%3Amain)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18.18-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square&logo=opensourceinitiative&logoColor=white)](https://github.com/ashishviradiya/s3flow/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square&logo=opensourceinitiative&logoColor=white)](https://github.com/AshishViradiya153/s3flow/blob/main/LICENSE)
 
 </div>
 
@@ -13,7 +13,7 @@
 
 The package uses a **modular layout**: the default entry covers listing, archiving, and file/HTTP sinks; optional subpaths add multipart upload (`s3flow/platform`), BullMQ helpers (`s3flow/bullmq`), and cloud **`StorageProvider`** adapters (`s3flow/gcs`, `s3flow/azure-blob`). TypeScript types ship with the package—open `dist/*.d.ts` or use your editor’s IntelliSense after `npm install s3flow`.
 
-Source code and issues: **[github.com/ashishviradiya/s3flow](https://github.com/ashishviradiya/s3flow)**.
+Source code and issues: **[github.com/AshishViradiya153/s3flow](https://github.com/AshishViradiya153/s3flow)**.
 
 **Full documentation** (guides for checkpoints, IAM, prepared index, platform/BullMQ, CLI, troubleshooting): **[docs/README.md](docs/README.md)** — also shipped under `node_modules/s3flow/docs/` after install.
 
@@ -486,11 +486,10 @@ npm run pack:dry-run
 2. Update **[CHANGELOG.md](CHANGELOG.md)** for user-visible fixes and features (semver-facing notes).
 3. Run **`npm run verify`**. **`prepublishOnly`** runs the same checks on **`npm publish`**. Pull requests should stay green: CI runs the same **`verify`** script on Node.js **18, 20, 22, and 24** (see `.github/workflows/ci.yml`).
 4. Run **`npm run pack:dry-run`** to confirm the published tarball contains `dist/`, `docs/`, `README.md`, `LICENSE`, and other `files` from `package.json` (for example `CHANGELOG.md`, `CONTRIBUTING.md`, `SECURITY.md`).
-5. **`publishConfig.provenance`** is set for [npm provenance](https://docs.npmjs.com/generating-provenance-statements). Local publishes without OIDC may need **`npm publish --no-provenance`** unless you use trusted publishing (for example GitHub Actions).
 
 ## Giving feedback and contributing
 
-- **Issues:** report bugs or request features via [GitHub Issues](https://github.com/ashishviradiya/s3flow/issues) (adjust the URL if the repository moves).
+- **Issues:** report bugs or request features via [GitHub Issues](https://github.com/AshishViradiya153/s3flow/issues) (adjust the URL if the repository moves).
 - **Contributing:** see [CONTRIBUTING.md](CONTRIBUTING.md) (setup, `verify`, PR expectations).
 - **Security:** see [SECURITY.md](SECURITY.md); do not open public issues for undisclosed vulnerabilities.
 

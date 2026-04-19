@@ -8,7 +8,7 @@ Security fixes are applied to the **latest published minor release** on the defa
 
 **Please do not** file a public GitHub issue for undisclosed security problems.
 
-1. **Preferred:** use [GitHub Security Advisories](https://github.com/ashishviradiya/s3flow/security/advisories/new) for this repository (“Report a vulnerability”). That keeps details private until a fix is ready.
+1. **Preferred:** use [GitHub Security Advisories](https://github.com/AshishViradiya153/s3flow/security/advisories/new) for this repository (“Report a vulnerability”). That keeps details private until a fix is ready.
 2. If you cannot use GitHub, contact the repository maintainers through a channel they publish on the repo or org profile.
 
 Include as much of the following as you can:

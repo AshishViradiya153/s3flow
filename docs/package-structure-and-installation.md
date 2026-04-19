@@ -24,7 +24,3 @@ Peers are **optional** (`peerDependenciesMeta.optional: true`): you only install
 - **`bullmq`** — required for `s3flow/bullmq`.
 - **`@google-cloud/storage`** — required for `s3flow/gcs`.
 - **`@azure/storage-blob`** — required for `s3flow/azure-blob`.
-
-## Provenance
-
-`publishConfig.provenance` is enabled for npm. CI publishes with OIDC typically produce provenance; local `npm publish` may need `--no-provenance` without trusted publishing. See [Publishing](../README.md#publishing) in the root README.
