@@ -1,5 +1,5 @@
 {
-  "name": "s3download",
+  "name": "@ashishviradiya153/s3download",
   "version": "0.1.2",
   "packageManager": "pnpm@9.15.9",
   "description": "s3download — streaming S3 prefix → ZIP/tar/tar.gz with backpressure-safe pipelines, checkpoints, optional multipart upload (./platform), NDJSON prepared indexes, metrics, and a CLI.",

@@ -2,14 +2,14 @@
  * Producer side: enqueue a multipart “folder → S3” job for workers running
  * `createFolderArchiveToS3Processor` (see bullmq-archive-worker.ts).
  *
- * Install: `bullmq`, `s3download`, `@aws-sdk/client-s3`, `@aws-sdk/lib-storage` on workers.
+ * Install: `bullmq`, `@ashishviradiya153/s3download`, `@aws-sdk/client-s3`, `@aws-sdk/lib-storage` on workers.
  * Environment: `SOURCE_URI`, `DEST_BUCKET`, `DEST_KEY`; optional `REDIS_HOST`, `REDIS_PORT`.
  */
 import { Queue } from "bullmq";
 import {
   DEFAULT_FOLDER_ARCHIVE_QUEUE_NAME,
   enqueueFolderArchiveToS3,
-} from "s3download/bullmq";
+} from "@ashishviradiya153/s3download/bullmq";
 
 async function main(): Promise<void> {
   const source = process.env.SOURCE_URI;

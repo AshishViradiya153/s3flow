@@ -10,7 +10,7 @@ import {
   downloadFolderToFile,
   RedisCheckpointStore,
   type RedisCheckpointCommands,
-} from "s3download";
+} from "@ashishviradiya153/s3download";
 
 /** Minimal stand-in for demos; replace with a real Redis client. */
 class MemoryRedis implements RedisCheckpointCommands {

@@ -8,7 +8,7 @@
 ## Install
 
 ```bash
-npm install s3download @aws-sdk/client-s3
+npm install @ashishviradiya153/s3download @aws-sdk/client-s3
 ```
 
 Pin `@aws-sdk/client-s3` in your app if you need a fixed major line. The library depends on it transitively; declaring it keeps Renovate/Dependabot and your lockfile explicit.
@@ -29,7 +29,7 @@ Reuse **one** `S3Client` across requests or jobs when possible (connection reuse
 ```ts
 import { createWriteStream } from "node:fs";
 import { S3Client } from "@aws-sdk/client-s3";
-import { downloadFolderToFile } from "s3download";
+import { downloadFolderToFile } from "@ashishviradiya153/s3download";
 
 const client = new S3Client({}); // region/credentials from environment
 
@@ -43,5 +43,5 @@ await downloadFolderToFile("out.zip", {
 ## Next steps
 
 - [Architecture & concepts](architecture.md) — what the pipeline does in order.
-- [Reference: exports & modules](reference-exports.md) — `s3download` vs `s3download/platform` / `bullmq` / `gcs` / `azure-blob`.
+- [Reference: exports & modules](reference-exports.md) — `@ashishviradiya153/s3download` vs `@ashishviradiya153/s3download/platform` / `bullmq` / `gcs` / `azure-blob`.
 - [`examples/`](../examples/README.md) — copy-paste scripts (HTTP, checkpoints, prepared index, IAM-style flows).

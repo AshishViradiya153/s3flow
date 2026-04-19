@@ -1,7 +1,7 @@
 /**
  * Sketch: adapt **`pg.Pool`** (node-postgres) to s3download’s **`SqlCheckpointClient`** for
  * **`SqlTableCheckpointStore`**. Install **`pg`** in your application; it is not a dependency of
- * the `s3download` package.
+ * the `@ashishviradiya153/s3download` package.
  *
  * Create the table once (Postgres):
  *
@@ -14,7 +14,7 @@
  *
  * Then wire `checkpoint.store` with `new SqlTableCheckpointStore(createSqlCheckpointClientFromPgPool(pool), { dialect: "postgres", tableName: "s3download_checkpoint" })`.
  */
-import type { SqlCheckpointClient } from "s3download";
+import type { SqlCheckpointClient } from "@ashishviradiya153/s3download";
 
 /** Duck type compatible with `pg.Pool#query` result shape. */
 export interface PgLikePool {

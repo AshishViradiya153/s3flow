@@ -2,7 +2,7 @@
 
 # s3download
 
-[![npm version](https://img.shields.io/npm/v/s3download?style=flat-square&logo=npm&label=npm)](https://www.npmjs.com/package/s3download)
+[![npm version](https://img.shields.io/npm/v/@ashishviradiya153%2Fs3download?style=flat-square&logo=npm&label=npm)](https://www.npmjs.com/package/@ashishviradiya153/s3download)
 [![CI](https://img.shields.io/github/actions/workflow/status/AshishViradiya153/s3download/ci.yml?branch=main&logo=github&label=CI&style=flat-square)](https://github.com/AshishViradiya153/s3download/actions/workflows/ci.yml?query=branch%3Amain)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20.19-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square&logo=opensourceinitiative&logoColor=white)](https://github.com/AshishViradiya153/s3download/blob/main/LICENSE)
@@ -11,11 +11,11 @@
 
 **s3download** is a Node.js library for **streaming an Amazon S3 prefix into a ZIP, tar, or tar.gz archive** with paginated listing, `GetObject` as byte streams, and **`stream/promises.pipeline`** so backpressure propagates end to end. It is built for production workloads: retries, checkpoints, optional multipart upload of the archive back to S3, NDJSON prepared indexes, metrics (including Prometheus), and a small CLI.
 
-The package uses a **modular layout**: the default entry covers listing, archiving, and file/HTTP sinks; optional subpaths add multipart upload (`s3download/platform`), BullMQ helpers (`s3download/bullmq`), and cloud **`StorageProvider`** adapters (`s3download/gcs`, `s3download/azure-blob`). TypeScript types ship with the package—open `dist/*.d.ts` or use your editor’s IntelliSense after `npm install s3download`.
+The package uses a **modular layout**: the default entry covers listing, archiving, and file/HTTP sinks; optional subpaths add multipart upload (`@ashishviradiya153/s3download/platform`), BullMQ helpers (`@ashishviradiya153/s3download/bullmq`), and cloud **`StorageProvider`** adapters (`@ashishviradiya153/s3download/gcs`, `@ashishviradiya153/s3download/azure-blob`). TypeScript types ship with the package—open `dist/*.d.ts` or use your editor’s IntelliSense after `npm install @ashishviradiya153/s3download`.
 
 Source code and issues: **[github.com/AshishViradiya153/s3download](https://github.com/AshishViradiya153/s3download)**.
 
-**Full documentation** (guides for checkpoints, IAM, prepared index, platform/BullMQ, CLI, troubleshooting): **[docs/README.md](docs/README.md)** — also shipped under `node_modules/s3download/docs/` after install.
+**Full documentation** (guides for checkpoints, IAM, prepared index, platform/BullMQ, CLI, troubleshooting): **[docs/README.md](docs/README.md)** — also shipped under `node_modules/@ashishviradiya153/s3download/docs/` after install.
 
 # Table of Contents
 
@@ -51,7 +51,7 @@ The following steps use **npm**. They assume you have a supported **Node.js** ve
 1. Create or open a Node.js project and install the package:
 
 ```bash
- npm install s3download
+ npm install @ashishviradiya153/s3download
 ```
 
 Adding the package updates your lock file. You **should** commit your lock file with your application code. See [package-lock.json](https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json) for npm’s guidance.
@@ -63,7 +63,7 @@ Adding the package updates your lock file. You **should** commit your lock file 
 ```js
 import { createWriteStream } from "node:fs";
 import { S3Client } from "@aws-sdk/client-s3";
-import { createFolderArchiveStream } from "s3download";
+import { createFolderArchiveStream } from "@ashishviradiya153/s3download";
 
 const client = new S3Client({}); // region/credentials from your environment
 
@@ -96,11 +96,11 @@ For more patterns (resume, prepared index, uploading the archive to S3), continu
 
 - `@aws-sdk/client-s3` is a **dependency** of s3download (installed transitively). Pin it in your app if you need a fixed major line, for example:
   ```bash
-  npm install s3download @aws-sdk/client-s3@^3
+  npm install @ashishviradiya153/s3download @aws-sdk/client-s3@^3
   ```
 - `[mime-types](https://github.com/jshttp/mime-types)` is used for `Content-Type` (HTTP responses and S3 multipart uploads via `resolveArchiveContentType`).
 
-**Optional peer: multipart upload (`s3download/platform`)**
+**Optional peer: multipart upload (`@ashishviradiya153/s3download/platform`)**
 
 To stream an archive **to S3** using `@aws-sdk/lib-storage`’s multipart upload, install the peer yourself:
 
@@ -112,9 +112,9 @@ npm install @aws-sdk/lib-storage
 
 **Optional peer: BullMQ**
 
-For the BullMQ worker helpers under `s3download/bullmq`, install `bullmq` in your worker project.
+For the BullMQ worker helpers under `@ashishviradiya153/s3download/bullmq`, install `bullmq` in your worker project.
 
-**Optional peers: GCS / Azure (`s3download/gcs`, `s3download/azure-blob`)**
+**Optional peers: GCS / Azure (`@ashishviradiya153/s3download/gcs`, `@ashishviradiya153/s3download/azure-blob`)**
 
 To archive from **Google Cloud Storage** or **Azure Blob** via **`storageProvider`**, install the matching SDK:
 
@@ -134,19 +134,19 @@ Use **Node 24** when developing this repository (see [.nvmrc](.nvmrc)): `nvm use
 
 s3download follows a **modular entry** pattern similar in spirit to per-service packages in AWS SDK for JavaScript v3: import only what you need.
 
-| Import path             | Role                                                                                                               |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `s3download`            | Core: list → get → archive → your `Writable` or HTTP; file helpers; checkpoints; metrics; CLI binary `s3download`. |
-| `s3download/platform`   | Multipart upload of the archive to S3 (`runFolderArchiveToS3`, checkpoint types, job helpers).                     |
-| `s3download/bullmq`     | JSON-safe job payloads and processor for `runFolderArchiveToS3` (install `bullmq` peer).                           |
-| `s3download/gcs`        | `GcsStorageProvider` for **Google Cloud Storage** lists + reads (install `@google-cloud/storage` peer).            |
-| `s3download/azure-blob` | `AzureBlobStorageProvider` for **Azure Blob Storage** (install `@azure/storage-blob` peer).                        |
+| Import path                                | Role                                                                                                               |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `@ashishviradiya153/s3download`            | Core: list → get → archive → your `Writable` or HTTP; file helpers; checkpoints; metrics; CLI binary `s3download`. |
+| `@ashishviradiya153/s3download/platform`   | Multipart upload of the archive to S3 (`runFolderArchiveToS3`, checkpoint types, job helpers).                     |
+| `@ashishviradiya153/s3download/bullmq`     | JSON-safe job payloads and processor for `runFolderArchiveToS3` (install `bullmq` peer).                           |
+| `@ashishviradiya153/s3download/gcs`        | `GcsStorageProvider` for **Google Cloud Storage** lists + reads (install `@google-cloud/storage` peer).            |
+| `@ashishviradiya153/s3download/azure-blob` | `AzureBlobStorageProvider` for **Azure Blob Storage** (install `@azure/storage-blob` peer).                        |
 
 Example:
 
 ```ts
-import { createFolderArchiveStream } from "s3download";
-import { runFolderArchiveToS3 } from "s3download/platform";
+import { createFolderArchiveStream } from "@ashishviradiya153/s3download";
+import { runFolderArchiveToS3 } from "@ashishviradiya153/s3download/platform";
 ```
 
 **Examples:** the repository includes runnable sketches for each major integration (core download, checkpoints, prepared index, explicit-key and multi-root IAM-style flows, HTTP, multipart upload, Lambda, BullMQ producer/worker, presigned URLs, GCS/Azure providers, Prometheus metrics, cost/strategy hints, in-memory demos). See [examples/README.md](examples/README.md).
@@ -157,7 +157,7 @@ import { runFolderArchiveToS3 } from "s3download/platform";
 
 ```ts
 import { createWriteStream } from "node:fs";
-import { createFolderArchiveStream } from "s3download";
+import { createFolderArchiveStream } from "@ashishviradiya153/s3download";
 
 const stream = createFolderArchiveStream({
   source: "s3://my-bucket/path/to/folder/",
@@ -172,7 +172,7 @@ stream.pipe(createWriteStream("out.zip"));
 ### Download in one call
 
 ```ts
-import { downloadFolderToFile } from "s3download";
+import { downloadFolderToFile } from "@ashishviradiya153/s3download";
 
 const { stats } = await downloadFolderToFile("out.zip", {
   source: "s3://my-bucket/path/to/folder/",
@@ -192,7 +192,7 @@ import {
   downloadFolderToFile,
   resumeFolderArchiveToFile,
   FileCheckpointStore,
-} from "s3download";
+} from "@ashishviradiya153/s3download";
 
 const store = new FileCheckpointStore(".checkpoints");
 const checkpoint = { jobId: "export-1", store };
@@ -222,7 +222,7 @@ List once to a file, then build the archive from that index (no second `ListObje
 import {
   prepareFolderArchiveIndexToFile,
   downloadFolderToFileFromPreparedIndex,
-} from "s3download";
+} from "@ashishviradiya153/s3download";
 
 await prepareFolderArchiveIndexToFile("prefix.ndjson", {
   source: "s3://my-bucket/prefix/",
@@ -261,7 +261,7 @@ Repository examples:
 ### Express (HTTP response)
 
 ```ts
-import { createFolderArchiveStream } from "s3download";
+import { createFolderArchiveStream } from "@ashishviradiya153/s3download";
 
 app.get("/export.zip", (req, res) => {
   res.setHeader("Content-Type", "application/zip");
@@ -281,7 +281,7 @@ app.get("/export.zip", (req, res) => {
 ### Upload archive to S3 (multipart)
 
 ```ts
-import { runFolderArchiveToS3 } from "s3download/platform";
+import { runFolderArchiveToS3 } from "@ashishviradiya153/s3download/platform";
 
 await runFolderArchiveToS3({
   source: "s3://src-bucket/folder/",
@@ -305,13 +305,13 @@ For **AWS Lambda**, stream a prefix to a destination object with `runFolderArchi
 Published imports:
 
 ```ts
-import { verifyS3ObjectBytesMatchArchiveStats } from "s3download";
-import { runFolderArchiveToS3 } from "s3download/platform";
+import { verifyS3ObjectBytesMatchArchiveStats } from "@ashishviradiya153/s3download";
+import { runFolderArchiveToS3 } from "@ashishviradiya153/s3download/platform";
 ```
 
 ### BullMQ: worker with verification
 
-For a **Redis-backed queue**, use **`createFolderArchiveToS3Processor`** from `s3download/bullmq` on a BullMQ `Worker`. The repo shows a processor that wraps the default runner and fails the job if post-upload byte verification does not match (same **`s3:GetObject`** on the output object as in the Lambda section):
+For a **Redis-backed queue**, use **`createFolderArchiveToS3Processor`** from `@ashishviradiya153/s3download/bullmq` on a BullMQ `Worker`. The repo shows a processor that wraps the default runner and fails the job if post-upload byte verification does not match (same **`s3:GetObject`** on the output object as in the Lambda section):
 
 - `[examples/bullmq-archive-worker.ts](examples/bullmq-archive-worker.ts)`
 
@@ -323,7 +323,7 @@ import { S3Client } from "@aws-sdk/client-s3";
 import {
   createFolderArchiveToS3Processor,
   DEFAULT_FOLDER_ARCHIVE_QUEUE_NAME,
-} from "s3download/bullmq";
+} from "@ashishviradiya153/s3download/bullmq";
 
 const client = new S3Client({});
 new Worker(
@@ -337,7 +337,7 @@ Enqueue jobs with **`enqueueFolderArchiveToS3`** (same module); install the **`b
 
 ### Presigned GET URLs (browser-oriented)
 
-For UIs that must **not** hold long-lived AWS keys in the browser, issue **short-lived presigned GET URLs** on your API (IAM on the server role only). Use **`signGetObjectDownloadUrl`** / **`signGetObjectDownloadUrls`** from **`s3download`**, then let the client `fetch()` each URL and assemble a ZIP with a browser library (s3download is Node-first; it does not ship a browser bundle).
+For UIs that must **not** hold long-lived AWS keys in the browser, issue **short-lived presigned GET URLs** on your API (IAM on the server role only). Use **`signGetObjectDownloadUrl`** / **`signGetObjectDownloadUrls`** from **`@ashishviradiya153/s3download`**, then let the client `fetch()` each URL and assemble a ZIP with a browser library (s3download is Node-first; it does not ship a browser bundle).
 
 Before building a large client-side archive, call **`recommendArchiveExecutionSurface`** with rough **byte** and **object** estimates—it returns **`"browser"`** vs **`"server"`** with stable rationale strings (defaults favor server for big jobs).
 
@@ -345,7 +345,7 @@ Before building a large client-side archive, call **`recommendArchiveExecutionSu
 import {
   recommendArchiveExecutionSurface,
   signGetObjectDownloadUrls,
-} from "s3download";
+} from "@ashishviradiya153/s3download";
 import { S3Client } from "@aws-sdk/client-s3";
 
 const client = new S3Client({});
@@ -361,7 +361,7 @@ Longer notes (TTL, batch sizing, hybrid thresholds): [docs/presigned-urls.md](do
 
 ## Command line interface
 
-Installing the package adds the **`s3download`** command (`package.json` **`bin`**). The published tarball already includes `dist/`, so you do **not** need to build locally to use the CLI after `npm install s3download`.
+Installing the package adds the **`s3download`** command (`package.json` **`bin`**). The published tarball already includes `dist/`, so you do **not** need to build locally to use the CLI after `npm install @ashishviradiya153/s3download`.
 
 ```bash
 npx s3download archive --source s3://bucket/prefix/ -o out.zip
@@ -393,7 +393,7 @@ s3download is a **data-plane** library (list → get → encode → sink) with *
 
 - **You own policy**—where jobs run, how they are queued, cost limits, and how checkpoints are stored are your decisions. The library provides streaming, backpressure, stats, and **advisory** helpers (strategy hints, cost estimates, hybrid browser vs server recommendation); it does not replace your orchestration.
 - **Important behavior is injectable**—`S3Client`, optional `StorageProvider`, `CheckpointStore`, `retry`, `AbortSignal`, `transformGetObjectBody`, `filters`, `deltaBaseline`, `failureMode`, and callbacks such as `onProgress`, `onStats`, `onArchiveEntryStart` / `onArchiveEntryEnd`, `retry.onRetry`.
-- **Optional entrypoints**—`s3download/platform`, `s3download/bullmq`, prepared index, presigned URLs, and the in-memory job registry are add-ons; use only what your architecture needs.
+- **Optional entrypoints**—`@ashishviradiya153/s3download/platform`, `@ashishviradiya153/s3download/bullmq`, prepared index, presigned URLs, and the in-memory job registry are add-ons; use only what your architecture needs.
 - **Authorization scope stays at the call site**—which keys enter an archive comes from list roots, **`filters`**, **`preparedIndexNdjson`**, or a custom **`StorageProvider`**. Align that with IAM and org policy; see [Selective files, multiple folders, and IAM](#selective-files-multiple-folders-and-iam).
 
 ## Debug and explain
@@ -401,7 +401,7 @@ s3download is a **data-plane** library (list → get → encode → sink) with *
 Set **`debug: true`** on archive or prepared-index options for structured **debug**-level logs: list pages, GetObject lifecycle, per-object skips, durations, retries, and an end-of-run stage breakdown (heuristic when ZIP concurrency overlaps phases). If you omit `logger`, a shared stderr JSON logger at `debug` is used; with your own Pino logger, a child is created at `debug`.
 
 ```ts
-import { createFolderArchiveStream } from "s3download";
+import { createFolderArchiveStream } from "@ashishviradiya153/s3download";
 
 createFolderArchiveStream({
   source: "s3://bucket/prefix/",

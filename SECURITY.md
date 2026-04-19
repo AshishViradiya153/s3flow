@@ -22,7 +22,7 @@ Include as much of the following as you can:
 
 **In scope** for this project:
 
-- The **s3download** library and **CLI** code shipped in this repository (including optional entry points such as `s3download/platform`, `s3download/bullmq`, and cloud adapters when used as documented).
+- The **s3download** library and **CLI** code shipped in this repository (including optional entry points such as `@ashishviradiya153/s3download/platform`, `@ashishviradiya153/s3download/bullmq`, and cloud adapters when used as documented).
 - Dependencies **only** insofar as we can mitigate by upgrading or changing our usage (we do not fix upstream AWS/GCP/Azure SDK bugs ourselves).
 
 **Out of scope** (report to the vendor or project instead):

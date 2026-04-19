@@ -1,6 +1,6 @@
 # s3download examples
 
-Runnable sketches aligned with published imports (`s3download`, `s3download/platform`, …). From a project that depends on `s3download`, copy a file and adjust environment variables and ARNs/buckets. Deeper guides live in **[`docs/README.md`](../docs/README.md)**.
+Runnable sketches aligned with published imports (`@ashishviradiya153/s3download`, `@ashishviradiya153/s3download/platform`, …). From a project that depends on `@ashishviradiya153/s3download`, copy a file and adjust environment variables and ARNs/buckets. Deeper guides live in **[`docs/README.md`](../docs/README.md)**.
 
 | Example                                                                  | What it shows                                                                                                                |
 | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |

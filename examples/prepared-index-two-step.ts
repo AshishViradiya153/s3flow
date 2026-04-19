@@ -7,7 +7,7 @@ import { S3Client } from "@aws-sdk/client-s3";
 import {
   downloadFolderToFileFromPreparedIndex,
   prepareFolderArchiveIndexToFile,
-} from "s3download";
+} from "@ashishviradiya153/s3download";
 
 async function main(): Promise<void> {
   const source = process.env.SOURCE_URI;

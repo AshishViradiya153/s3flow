@@ -9,7 +9,7 @@ import {
   downloadFolderToFile,
   FileCheckpointStore,
   resumeFolderArchiveToFile,
-} from "s3download";
+} from "@ashishviradiya153/s3download";
 
 async function main(): Promise<void> {
   const source = process.env.SOURCE_URI;

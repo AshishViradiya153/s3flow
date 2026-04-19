@@ -211,7 +211,7 @@ export interface CreateFolderArchiveToS3ProcessorOptions {
  * @example
  * ```ts
  * import { Worker } from "bullmq";
- * import { createFolderArchiveToS3Processor, FOLDER_ARCHIVE_TO_S3_JOB_NAME } from "s3download/bullmq";
+ * import { createFolderArchiveToS3Processor, FOLDER_ARCHIVE_TO_S3_JOB_NAME } from "@ashishviradiya153/s3download/bullmq";
  *
  * const processor = createFolderArchiveToS3Processor({});
  * new Worker("s3download:folder-archive-to-s3", processor, { connection });

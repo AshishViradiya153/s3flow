@@ -2,11 +2,14 @@
  * Pass a `prom-client` `Registry` via `prometheus` so completion counters/histograms update on success.
  * Runs entirely with `MemoryStorageProvider` (no AWS).
  *
- * Install: `prom-client` is already a dependency of `s3download` (metrics); this example prints text exposition.
+ * Install: `prom-client` is already a dependency of `@ashishviradiya153/s3download` (metrics); this example prints text exposition.
  */
 import { createWriteStream } from "node:fs";
 import { Registry } from "prom-client";
-import { MemoryStorageProvider, pumpArchiveToWritable } from "s3download";
+import {
+  MemoryStorageProvider,
+  pumpArchiveToWritable,
+} from "@ashishviradiya153/s3download";
 
 async function main(): Promise<void> {
   const register = new Registry();

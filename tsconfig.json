@@ -6,11 +6,11 @@
     "lib": ["ES2022"],
     "baseUrl": ".",
     "paths": {
-      "s3download": ["./src/index.ts"],
-      "s3download/platform": ["./src/platform.ts"],
-      "s3download/bullmq": ["./src/bullmq.ts"],
-      "s3download/gcs": ["./src/gcs.ts"],
-      "s3download/azure-blob": ["./src/azure-blob.ts"]
+      "@ashishviradiya153/s3download": ["./src/index.ts"],
+      "@ashishviradiya153/s3download/platform": ["./src/platform.ts"],
+      "@ashishviradiya153/s3download/bullmq": ["./src/bullmq.ts"],
+      "@ashishviradiya153/s3download/gcs": ["./src/gcs.ts"],
+      "@ashishviradiya153/s3download/azure-blob": ["./src/azure-blob.ts"]
     },
     "strict": true,
     "skipLibCheck": true,

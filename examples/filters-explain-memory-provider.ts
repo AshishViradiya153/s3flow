@@ -9,7 +9,7 @@ import {
   MemoryStorageProvider,
   pumpArchiveToWritable,
   summarizeArchiveRunClassifications,
-} from "s3download";
+} from "@ashishviradiya153/s3download";
 
 async function main(): Promise<void> {
   const storageProvider = new MemoryStorageProvider(

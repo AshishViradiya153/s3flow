@@ -5,7 +5,7 @@
  * Credentials: default AWS SDK chain (env, profile, IAM role).
  */
 import { S3Client } from "@aws-sdk/client-s3";
-import { downloadFolderToFile } from "s3download";
+import { downloadFolderToFile } from "@ashishviradiya153/s3download";
 
 async function main(): Promise<void> {
   const source = process.env.SOURCE_URI;
