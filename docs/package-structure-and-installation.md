@@ -1,0 +1,30 @@
+# Installation & package layout
+
+## What gets installed
+
+The published tarball includes `dist/` (compiled JS + `.d.ts`), `README.md`, `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`, `SECURITY.md`, and this **`docs/`** tree. After `npm install s3flow`, you can open `node_modules/s3flow/docs/README.md` offline.
+
+## Entry points (`exports`)
+
+| Import path         | Role                                                                                                                                                                                                                                                                                                                       |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `s3flow`            | Core **library** API (`import` from `"s3flow"`): list → archive → `Writable` / file helpers, checkpoints, prepared index, presigned URLs, metrics, job registry helpers, etc. The same npm package **also** ships the **`s3flow` CLI** via `package.json` **`bin`** — not a module import; see [CLI guide](guides/cli.md). |
+| `s3flow/platform`   | Multipart upload of the archive to S3 (`runFolderArchiveToS3`, `runFolderArchiveToWritable`), plus checkpoint/logger re-exports used by workers.                                                                                                                                                                           |
+| `s3flow/bullmq`     | JSON-safe job payloads + `createFolderArchiveToS3Processor` / `enqueueFolderArchiveToS3` for BullMQ workers.                                                                                                                                                                                                               |
+| `s3flow/gcs`        | `GcsStorageProvider` (+ `GcsStorageProviderOptions`) — list/get via `@google-cloud/storage`.                                                                                                                                                                                                                               |
+| `s3flow/azure-blob` | `AzureBlobStorageProvider` (+ `AzureBlobStorageProviderOptions`) — list/get via `@azure/storage-blob`.                                                                                                                                                                                                                     |
+
+Both **ESM** and **CJS** are supported; TypeScript resolves types per `exports` in `package.json`.
+
+## Peer dependencies
+
+Peers are **optional** (`peerDependenciesMeta.optional: true`): you only install the peer for the integration you use.
+
+- **`@aws-sdk/lib-storage`** — required for `runFolderArchiveToS3` and multipart upload paths.
+- **`bullmq`** — required for `s3flow/bullmq`.
+- **`@google-cloud/storage`** — required for `s3flow/gcs`.
+- **`@azure/storage-blob`** — required for `s3flow/azure-blob`.
+
+## Provenance
+
+`publishConfig.provenance` is enabled for npm. CI publishes with OIDC typically produce provenance; local `npm publish` may need `--no-provenance` without trusted publishing. See [Publishing](../README.md#publishing) in the root README.
