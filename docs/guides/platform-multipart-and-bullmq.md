@@ -1,6 +1,6 @@
 # Guide: platform, multipart upload & BullMQ
 
-## `s3flow/platform`
+## `s3download/platform`
 
 Install **`@aws-sdk/lib-storage`**.
 
@@ -9,11 +9,11 @@ Install **`@aws-sdk/lib-storage`**.
 
 Checkpoint and all **`CreateFolderArchiveStreamOptions`** fields apply the same way as the default entrypoint.
 
-Post-upload, you can **`HeadObject`** the destination and compare size to **`stats.bytesWritten`** using **`verifyS3ObjectBytesMatchArchiveStats`** from **`s3flow`** (not `s3flow/platform`; grant **`s3:GetObject`** on that object for `HeadObject`).
+Post-upload, you can **`HeadObject`** the destination and compare size to **`stats.bytesWritten`** using **`verifyS3ObjectBytesMatchArchiveStats`** from **`s3download`** (not `s3download/platform`; grant **`s3:GetObject`** on that object for `HeadObject`).
 
 Examples: [examples/run-multipart-to-s3.ts](../../examples/run-multipart-to-s3.ts), [examples/lambda-archive-to-s3.ts](../../examples/lambda-archive-to-s3.ts).
 
-## `s3flow/bullmq`
+## `s3download/bullmq`
 
 Install **`bullmq`** in worker processes.
 
@@ -24,4 +24,4 @@ Examples: [examples/bullmq-enqueue-job.ts](../../examples/bullmq-enqueue-job.ts)
 
 ## In-memory job registry
 
-**`InMemoryArchiveJobRegistry`** and related **`ArchiveJob*Error`** classes are exported from **`s3flow`** and **re-exported** from **`s3flow/platform`** (see `src/archive-background-jobs.ts`). Use them for lightweight in-process job tracking without Redis; for distributed work, use BullMQ or your own queue.
+**`InMemoryArchiveJobRegistry`** and related **`ArchiveJob*Error`** classes are exported from **`s3download`** and **re-exported** from **`s3download/platform`** (see `src/archive-background-jobs.ts`). Use them for lightweight in-process job tracking without Redis; for distributed work, use BullMQ or your own queue.

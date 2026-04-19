@@ -1,20 +1,20 @@
 /**
- * Sketch: adapt **`pg.Pool`** (node-postgres) to s3flow’s **`SqlCheckpointClient`** for
+ * Sketch: adapt **`pg.Pool`** (node-postgres) to s3download’s **`SqlCheckpointClient`** for
  * **`SqlTableCheckpointStore`**. Install **`pg`** in your application; it is not a dependency of
- * the `s3flow` package.
+ * the `s3download` package.
  *
  * Create the table once (Postgres):
  *
  * ```sql
- * CREATE TABLE s3flow_checkpoint (
+ * CREATE TABLE s3download_checkpoint (
  *   job_id TEXT PRIMARY KEY,
  *   payload TEXT NOT NULL
  * );
  * ```
  *
- * Then wire `checkpoint.store` with `new SqlTableCheckpointStore(createSqlCheckpointClientFromPgPool(pool), { dialect: "postgres", tableName: "s3flow_checkpoint" })`.
+ * Then wire `checkpoint.store` with `new SqlTableCheckpointStore(createSqlCheckpointClientFromPgPool(pool), { dialect: "postgres", tableName: "s3download_checkpoint" })`.
  */
-import type { SqlCheckpointClient } from "s3flow";
+import type { SqlCheckpointClient } from "s3download";
 
 /** Duck type compatible with `pg.Pool#query` result shape. */
 export interface PgLikePool {

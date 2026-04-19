@@ -9,8 +9,8 @@
 
 | Module              | Class                      | Peer package            |
 | ------------------- | -------------------------- | ----------------------- |
-| `s3flow/gcs`        | `GcsStorageProvider`       | `@google-cloud/storage` |
-| `s3flow/azure-blob` | `AzureBlobStorageProvider` | `@azure/storage-blob`   |
+| `s3download/gcs`        | `GcsStorageProvider`       | `@google-cloud/storage` |
+| `s3download/azure-blob` | `AzureBlobStorageProvider` | `@azure/storage-blob`   |
 
 **URI shape:** keep **`source: "s3://bucket-or-container/prefix/"`** so the existing URI parser and path logic apply; data is read from GCS/Azure, not AWS.
 

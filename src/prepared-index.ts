@@ -20,7 +20,7 @@ export async function* streamPrefixIndexNdjson(
   const log = resolveArchiveLogger({
     logger: options.logger,
     debug: options.debug,
-  }).child({ lib: "s3flow", component: "prepared-index" });
+  }).child({ lib: "s3download", component: "prepared-index" });
   const provider = new S3StorageProvider(
     client,
     bucket,

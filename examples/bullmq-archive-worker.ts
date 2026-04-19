@@ -1,10 +1,10 @@
 /**
- * Example long-running worker: process `s3flow/bullmq` folder→S3 archive jobs from Redis,
+ * Example long-running worker: process `s3download/bullmq` folder→S3 archive jobs from Redis,
  * then **`HeadObject`**-verify uploaded bytes vs pump `stats.bytesWritten` (same pattern as
  * `examples/lambda-archive-to-s3.ts`).
  *
- * Install: `s3flow`, `bullmq`, `@aws-sdk/client-s3`, `@aws-sdk/lib-storage` (peer of `s3flow/platform`).
- * Run beside Redis; enqueue jobs from your API with `Queue` + `enqueueFolderArchiveToS3` from `s3flow/bullmq`.
+ * Install: `s3download`, `bullmq`, `@aws-sdk/client-s3`, `@aws-sdk/lib-storage` (peer of `s3download/platform`).
+ * Run beside Redis; enqueue jobs from your API with `Queue` + `enqueueFolderArchiveToS3` from `s3download/bullmq`.
  *
  * Environment (illustrative): `REDIS_HOST` (default `127.0.0.1`), `REDIS_PORT` (default `6379`).
  * IAM on workers: `s3:PutObject` (multipart) on the output key plus **`s3:GetObject` on that object** for `HeadObject` verify.
@@ -12,13 +12,13 @@
 import { S3Client } from "@aws-sdk/client-s3";
 import type { Job } from "bullmq";
 import { Worker } from "bullmq";
-import { verifyS3ObjectBytesMatchArchiveStats } from "s3flow";
+import { verifyS3ObjectBytesMatchArchiveStats } from "s3download";
 import {
   createFolderArchiveToS3Processor,
   DEFAULT_FOLDER_ARCHIVE_QUEUE_NAME,
   type FolderArchiveToS3JobData,
-} from "s3flow/bullmq";
-import type { ArchiveJobResult } from "s3flow/platform";
+} from "s3download/bullmq";
+import type { ArchiveJobResult } from "s3download/platform";
 
 function createVerifyingFolderArchiveProcessor(client: S3Client) {
   const inner = createFolderArchiveToS3Processor({ client });

@@ -5,7 +5,7 @@
  * Environment: `SOURCE_URI`, `DEST_BUCKET`, `DEST_KEY`
  */
 import { S3Client } from "@aws-sdk/client-s3";
-import { runFolderArchiveToS3 } from "s3flow/platform";
+import { runFolderArchiveToS3 } from "s3download/platform";
 
 async function main(): Promise<void> {
   const source = process.env.SOURCE_URI;

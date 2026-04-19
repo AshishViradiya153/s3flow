@@ -1,6 +1,6 @@
-# Contributing to s3flow
+# Contributing to s3download
 
-Thank you for helping improve s3flow. This document describes how to set up a development environment and what we expect in pull requests.
+Thank you for helping improve s3download. This document describes how to set up a development environment and what we expect in pull requests.
 
 ## Prerequisites
 
@@ -37,12 +37,12 @@ Other useful commands:
 ## Where things live
 
 - **Source:** `src/`
-- **Tests:** `test/` (Vitest; some suites use in-memory storage or chaos helpers—see README “Developing s3flow”).
+- **Tests:** `test/` (Vitest; some suites use in-memory storage or chaos helpers—see README “Developing s3download”).
 - **Examples:** `examples/` (illustrative; not always executed in CI).
 - **Documentation hub:** `docs/README.md` (guides, troubleshooting; published in the npm package under `docs/`).
 - **Error catalog:** `docs/errors.md`
 
 ## Questions and bugs
 
-- **Questions or feature ideas:** open a [GitHub issue](https://github.com/AshishViradiya153/s3flow/issues) (update the URL if the repository moves).
+- **Questions or feature ideas:** open a [GitHub issue](https://github.com/AshishViradiya153/s3download/issues) (update the URL if the repository moves).
 - **Security issues:** do **not** open a public issue; see [SECURITY.md](SECURITY.md).

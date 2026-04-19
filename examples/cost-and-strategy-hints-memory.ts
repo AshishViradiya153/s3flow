@@ -10,7 +10,7 @@ import {
   MemoryStorageProvider,
   pumpArchiveToWritable,
   suggestArchiveRunStrategyHints,
-} from "s3flow";
+} from "s3download";
 
 async function main(): Promise<void> {
   const storageProvider = new MemoryStorageProvider(
@@ -18,7 +18,7 @@ async function main(): Promise<void> {
   );
 
   const { stats } = await pumpArchiveToWritable(
-    createWriteStream("./_s3flow-cost-example.zip"),
+    createWriteStream("./_s3download-cost-example.zip"),
     {
       source: "s3://demo-bucket/x/",
       format: "zip",

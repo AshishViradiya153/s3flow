@@ -7,8 +7,8 @@
  */
 import { createWriteStream } from "node:fs";
 import { Storage } from "@google-cloud/storage";
-import { createFolderArchiveStream } from "s3flow";
-import { GcsStorageProvider } from "s3flow/gcs";
+import { createFolderArchiveStream } from "s3download";
+import { GcsStorageProvider } from "s3download/gcs";
 
 async function main(): Promise<void> {
   const bucketName = process.env.GCS_BUCKET;

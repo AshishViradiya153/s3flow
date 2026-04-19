@@ -9,7 +9,7 @@ import {
   downloadFolderToFile,
   FileCheckpointStore,
   resumeFolderArchiveToFile,
-} from "s3flow";
+} from "s3download";
 
 async function main(): Promise<void> {
   const source = process.env.SOURCE_URI;

@@ -1,16 +1,16 @@
 /**
  * Server-side batch signing for **browser downloads**: your API lists object keys (or receives an
  * allowlisted set from the client), then returns short-lived presigned GET URLs. The browser fetches
- * each URL and can feed bytes into a client-side ZIP library (not shipped with s3flow).
+ * each URL and can feed bytes into a client-side ZIP library (not shipped with s3download).
  *
- * Install: `s3flow`, `@aws-sdk/client-s3`. IAM on this role: `s3:ListBucket` on the prefix +
+ * Install: `s3download`, `@aws-sdk/client-s3`. IAM on this role: `s3:ListBucket` on the prefix +
  * `s3:GetObject` on objects you sign.
  */
 import { S3Client } from "@aws-sdk/client-s3";
 import {
   recommendArchiveExecutionSurface,
   signGetObjectDownloadUrl,
-} from "s3flow";
+} from "s3download";
 
 const client = new S3Client({});
 

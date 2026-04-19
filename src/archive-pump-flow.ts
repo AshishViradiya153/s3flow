@@ -204,7 +204,7 @@ export class ArchivePumpFlowEngine {
     this.#log = resolveArchiveLogger({
       logger: this.#options.logger,
       debug: this.#options.debug,
-    }).child({ lib: "s3flow", component: "pump-archive" });
+    }).child({ lib: "s3download", component: "pump-archive" });
 
     const { bucket, prefix } = parseS3Uri(this.#options.source);
     this.#bucket = bucket;

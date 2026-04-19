@@ -23,7 +23,7 @@ export const FOLDER_ARCHIVE_TO_S3_JOB_NAME = "folder-archive-to-s3" as const;
  * Suggested queue name; callers may use any Redis queue name.
  * @example `new Queue(DEFAULT_FOLDER_ARCHIVE_QUEUE_NAME, { connection })`
  */
-export const DEFAULT_FOLDER_ARCHIVE_QUEUE_NAME = "s3flow:folder-archive-to-s3";
+export const DEFAULT_FOLDER_ARCHIVE_QUEUE_NAME = "s3download:folder-archive-to-s3";
 
 /**
  * JSON-serializable payload for Redis (no functions, no `RegExp` instances).
@@ -210,10 +210,10 @@ export interface CreateFolderArchiveToS3ProcessorOptions {
  * @example
  * ```ts
  * import { Worker } from "bullmq";
- * import { createFolderArchiveToS3Processor, FOLDER_ARCHIVE_TO_S3_JOB_NAME } from "s3flow/bullmq";
+ * import { createFolderArchiveToS3Processor, FOLDER_ARCHIVE_TO_S3_JOB_NAME } from "s3download/bullmq";
  *
  * const processor = createFolderArchiveToS3Processor({});
- * new Worker("s3flow:folder-archive-to-s3", processor, { connection });
+ * new Worker("s3download:folder-archive-to-s3", processor, { connection });
  * ```
  */
 export function createFolderArchiveToS3Processor(

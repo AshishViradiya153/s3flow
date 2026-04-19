@@ -7,8 +7,8 @@
  */
 import { createWriteStream } from "node:fs";
 import { BlobServiceClient } from "@azure/storage-blob";
-import { createFolderArchiveStream } from "s3flow";
-import { AzureBlobStorageProvider } from "s3flow/azure-blob";
+import { createFolderArchiveStream } from "s3download";
+import { AzureBlobStorageProvider } from "s3download/azure-blob";
 
 async function main(): Promise<void> {
   const conn = process.env.AZURE_STORAGE_CONNECTION_STRING;
