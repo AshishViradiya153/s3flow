@@ -3,9 +3,9 @@
 # s3prefix-archive
 
 [![npm version](https://img.shields.io/npm/v/s3prefix-archive?style=flat-square&logo=npm&label=npm)](https://www.npmjs.com/package/s3prefix-archive)
-[![CI](https://img.shields.io/github/actions/workflow/status/AshishViradiya153/s3download/ci.yml?branch=main&logo=github&label=CI&style=flat-square)](https://github.com/AshishViradiya153/s3download/actions/workflows/ci.yml?query=branch%3Amain)
+[![CI](https://img.shields.io/github/actions/workflow/status/AshishViradiya153/s3prefix-archive/ci.yml?branch=main&logo=github&label=CI&style=flat-square)](https://github.com/AshishViradiya153/s3prefix-archive/actions/workflows/ci.yml?query=branch%3Amain)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20.19-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square&logo=opensourceinitiative&logoColor=white)](https://github.com/AshishViradiya153/s3download/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square&logo=opensourceinitiative&logoColor=white)](https://github.com/AshishViradiya153/s3prefix-archive/blob/main/LICENSE)
 
 </div>
 
@@ -13,7 +13,7 @@
 
 The package uses a **modular layout**: the default entry covers listing, archiving, and file/HTTP sinks; optional subpaths add multipart upload (`s3prefix-archive/platform`), BullMQ helpers (`s3prefix-archive/bullmq`), and cloud **`StorageProvider`** adapters (`s3prefix-archive/gcs`, `s3prefix-archive/azure-blob`). TypeScript types ship with the package—open `dist/*.d.ts` or use your editor’s IntelliSense after `npm install s3prefix-archive`.
 
-Source code and issues: **[github.com/AshishViradiya153/s3download](https://github.com/AshishViradiya153/s3download)**.
+Source code and issues: **[github.com/AshishViradiya153/s3prefix-archive](https://github.com/AshishViradiya153/s3prefix-archive)**.
 
 **Full documentation** (guides for checkpoints, IAM, prepared index, platform/BullMQ, CLI, troubleshooting): **[docs/README.md](docs/README.md)** — also shipped under `node_modules/s3prefix-archive/docs/` after install.
 
@@ -489,7 +489,7 @@ npm run pack:dry-run
 
 ## Giving feedback and contributing
 
-- **Issues:** report bugs or request features via [GitHub Issues](https://github.com/AshishViradiya153/s3download/issues) (adjust the URL if the repository moves).
+- **Issues:** report bugs or request features via [GitHub Issues](https://github.com/AshishViradiya153/s3prefix-archive/issues).
 - **Contributing:** see [CONTRIBUTING.md](CONTRIBUTING.md) (setup, `verify`, PR expectations).
 - **Security:** see [SECURITY.md](SECURITY.md); do not open public issues for undisclosed vulnerabilities.
 

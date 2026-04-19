@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AshishViradiya153/s3download.git"
+    "url": "git+https://github.com/AshishViradiya153/s3prefix-archive.git"
   },
   "bugs": {
-    "url": "https://github.com/AshishViradiya153/s3download/issues"
+    "url": "https://github.com/AshishViradiya153/s3prefix-archive/issues"
   },
-  "homepage": "https://github.com/AshishViradiya153/s3download#readme",
+  "homepage": "https://github.com/AshishViradiya153/s3prefix-archive#readme",
   "bin": {
     "s3prefix-archive": "./dist/cli.js"
   },
