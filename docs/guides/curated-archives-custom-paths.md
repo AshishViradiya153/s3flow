@@ -14,9 +14,9 @@ The library exposes hooks for both. **Which keys may be read** is always your ap
 
 ## How to feed a curated list
 
-| Approach | When to use | Listing during pump |
-| --- | --- | --- |
-| **`preparedIndexNdjson`** | You already have rows (`key`, `size`, optional `etag` / `lastModified`) as NDJSON. | No `ListObjectsV2` for that run ([prepared index](prepared-index.md)). |
+| Approach                     | When to use                                                                                                             | Listing during pump                                                           |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **`preparedIndexNdjson`**    | You already have rows (`key`, `size`, optional `etag` / `lastModified`) as NDJSON.                                      | No `ListObjectsV2` for that run ([prepared index](prepared-index.md)).        |
 | **Custom `StorageProvider`** | You implement `listObjects` / `getObjectStream` (for example wrapping `S3Client`, multiple buckets, or other backends). | Whatever your adapter implements ([storage providers](storage-providers.md)). |
 
 See also [IAM & selective exports](iam-selective-exports.md) for IAM alignment.
