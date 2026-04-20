@@ -9,7 +9,9 @@
 
 </div>
 
-**s3prefix-archive** is a Node.js library for **streaming an Amazon S3 prefix into a ZIP, tar, or tar.gz archive** with paginated listing, `GetObject` as byte streams, and **`stream/promises.pipeline`** so backpressure propagates end to end. It is built for production workloads: retries, checkpoints, optional multipart upload of the archive back to S3, NDJSON prepared indexes, metrics (including Prometheus), and a small CLI.
+**s3prefix-archive** is a Node.js library for **streaming objects from S3 (or compatible providers) into a ZIP, tar, or tar.gz archive**. It uses paginated listing, `GetObject` as byte streams, and **`stream/promises.pipeline`** so backpressure propagates end to end.
+
+The usual walkthrough archives **one prefix**; the same APIs also accept a **prepared NDJSON list** or a custom **`StorageProvider`**, and **`mapEntryName`** / **`entryMappings`** control entry paths inside the archive. Production-oriented options include retries, checkpoints, optional multipart upload of the finished archive to S3, prepared-index helpers, Prometheus metrics, and a small CLI.
 
 The package uses a **modular layout**: the default entry covers listing, archiving, and file/HTTP sinks; optional subpaths add multipart upload (`s3prefix-archive/platform`), BullMQ helpers (`s3prefix-archive/bullmq`), and cloud **`StorageProvider`** adapters (`s3prefix-archive/gcs`, `s3prefix-archive/azure-blob`). TypeScript types ship with the package—open `dist/*.d.ts` or use your editor’s IntelliSense after `npm install s3prefix-archive`.
 
@@ -28,21 +30,22 @@ Source code and issues: **[github.com/AshishViradiya153/s3prefix-archive](https:
 7. [Checkpoints and resume](#checkpoints-and-resume)
 8. [Prepared NDJSON index](#prepared-ndjson-index)
 9. [Selective files, multiple folders, and IAM](#selective-files-multiple-folders-and-iam)
-10. [Express (HTTP response)](#express-http-response)
-11. [Upload archive to S3 (multipart)](#upload-archive-to-s3-multipart)
-12. [Lambda: upload and verify](#lambda-upload-and-verify)
-13. [BullMQ: worker with verification](#bullmq-worker-with-verification)
-14. [Presigned GET URLs (browser-oriented)](#presigned-get-urls-browser-oriented)
-15. [Command line interface](#command-line-interface)
-16. [Configuration and credentials](#configuration-and-credentials)
-17. [Design principles](#design-principles)
-18. [Debug and explain](#debug-and-explain)
-19. [API overview](#api-overview)
-20. [Engineering notes](#engineering-notes)
-21. [Developing s3prefix-archive](#developing-s3prefix-archive)
-22. [Publishing](#publishing)
-23. [Giving feedback and contributing](#giving-feedback-and-contributing)
-24. [License](#license)
+10. [Curated object lists and custom paths in the ZIP](#curated-object-lists-and-custom-paths-in-the-zip)
+11. [Express (HTTP response)](#express-http-response)
+12. [Upload archive to S3 (multipart)](#upload-archive-to-s3-multipart)
+13. [Lambda: upload and verify](#lambda-upload-and-verify)
+14. [BullMQ: worker with verification](#bullmq-worker-with-verification)
+15. [Presigned GET URLs (browser-oriented)](#presigned-get-urls-browser-oriented)
+16. [Command line interface](#command-line-interface)
+17. [Configuration and credentials](#configuration-and-credentials)
+18. [Design principles](#design-principles)
+19. [Debug and explain](#debug-and-explain)
+20. [API overview](#api-overview)
+21. [Engineering notes](#engineering-notes)
+22. [Developing s3prefix-archive](#developing-s3prefix-archive)
+23. [Publishing](#publishing)
+24. [Giving feedback and contributing](#giving-feedback-and-contributing)
+25. [License](#license)
 
 ## Getting Started
 
@@ -258,6 +261,18 @@ Repository examples:
 - **Explicit keys (no live list during pump):** [examples/explicit-keys-prepared-index.ts](examples/explicit-keys-prepared-index.ts)
 - **Multiple list roots + fail-fast validation:** [examples/additional-sources-multi-prefix.ts](examples/additional-sources-multi-prefix.ts)
 
+### Curated object lists and custom paths in the ZIP
+
+Prefix + glob examples are a **convenience**. If you already know **which objects** to include and **what path each should have inside the archive**, you do not have to mirror S3 layout:
+
+1. **Decide the object set in your application** — the library does not choose keys for you.
+2. **Feed that set into the pump** — **`preparedIndexNdjson`** (NDJSON stream) and/or a custom **`StorageProvider`** (your `listObjects` / `getObjectStream`). Details: [docs/guides/curated-archives-custom-paths.md](docs/guides/curated-archives-custom-paths.md).
+3. **Set entry paths** — **`mapEntryName`** maps each `ObjectMeta` to a POSIX-style path inside the ZIP/tar; **`entryMappings`** overrides specific keys. Paths are validated (no `..` / absolute segments); see **`assertSafeArchivePath`** and **`CreateFolderArchiveStreamOptions`** in **`dist/*.d.ts`**.
+
+**Runnable example:** [examples/prepared-index-custom-entry-paths.ts](examples/prepared-index-custom-entry-paths.ts) (prepared index + `mapEntryName`).
+
+**`filters.predicate`** skips objects **after** list. If you must not enumerate unwanted keys at all, prefer **prepared index** or a **custom provider** over listing a large prefix and filtering.
+
 ### Express (HTTP response)
 
 ```ts
@@ -394,7 +409,7 @@ s3prefix-archive is a **data-plane** library (list → get → encode → sink) 
 - **You own policy**—where jobs run, how they are queued, cost limits, and how checkpoints are stored are your decisions. The library provides streaming, backpressure, stats, and **advisory** helpers (strategy hints, cost estimates, hybrid browser vs server recommendation); it does not replace your orchestration.
 - **Important behavior is injectable**—`S3Client`, optional `StorageProvider`, `CheckpointStore`, `retry`, `AbortSignal`, `transformGetObjectBody`, `filters`, `deltaBaseline`, `failureMode`, and callbacks such as `onProgress`, `onStats`, `onArchiveEntryStart` / `onArchiveEntryEnd`, `retry.onRetry`.
 - **Optional entrypoints**—`s3prefix-archive/platform`, `s3prefix-archive/bullmq`, prepared index, presigned URLs, and the in-memory job registry are add-ons; use only what your architecture needs.
-- **Authorization scope stays at the call site**—which keys enter an archive comes from list roots, **`filters`**, **`preparedIndexNdjson`**, or a custom **`StorageProvider`**. Align that with IAM and org policy; see [Selective files, multiple folders, and IAM](#selective-files-multiple-folders-and-iam).
+- **Authorization scope stays at the call site**—which keys enter an archive comes from list roots, **`filters`**, **`preparedIndexNdjson`**, or a custom **`StorageProvider`**. Align that with IAM and org policy; see [Selective files, multiple folders, and IAM](#selective-files-multiple-folders-and-iam) and [Curated object lists and custom paths in the ZIP](#curated-object-lists-and-custom-paths-in-the-zip).
 
 ## Debug and explain
 

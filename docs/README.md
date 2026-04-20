@@ -15,6 +15,7 @@ In-depth guides for using **s3prefix-archive** as an npm package: streaming S3 (
 | Resume after crash, Redis/SQL checkpoints                                        | [Guide: checkpoints & resume](guides/checkpoints-and-resume.md)                |
 | NDJSON index, skip live listing                                                  | [Guide: prepared index](guides/prepared-index.md)                              |
 | Filters, IAM, multiple prefixes, explicit keys                                   | [Guide: IAM & selective exports](guides/iam-selective-exports.md)              |
+| Curated object lists, custom paths inside the archive                            | [Guide: curated archives & custom paths](guides/curated-archives-custom-paths.md) |
 | Multipart upload to S3, Lambda, BullMQ                                           | [Guide: platform, multipart & BullMQ](guides/platform-multipart-and-bullmq.md) |
 | GCS, Azure Blob, custom `StorageProvider`                                        | [Guide: storage providers](guides/storage-providers.md)                        |
 | Prometheus, cost USD estimates, explain mode                                     | [Guide: observability & cost](guides/observability-and-cost.md)                |

@@ -11,6 +11,7 @@ Runnable sketches aligned with published imports (`s3prefix-archive`, `s3prefix-
 | [sql-checkpoint-adapter.ts](sql-checkpoint-adapter.ts)                   | Adapt `pg.Pool` to `SqlCheckpointClient` for `SqlTableCheckpointStore`                                                       |
 | [prepared-index-two-step.ts](prepared-index-two-step.ts)                 | `prepareFolderArchiveIndexToFile` then `downloadFolderToFileFromPreparedIndex`                                               |
 | [explicit-keys-prepared-index.ts](explicit-keys-prepared-index.ts)       | **`preparedIndexNdjson`** only—no live list; explicit keys for IAM/catalog-driven exports                                    |
+| [prepared-index-custom-entry-paths.ts](prepared-index-custom-entry-paths.ts) | **`preparedIndexNdjson`** + **`mapEntryName`** — ZIP paths differ from S3 keys                                                |
 | [additional-sources-multi-prefix.ts](additional-sources-multi-prefix.ts) | **`additionalListSources`** + **`parseAdditionalListSources`** — merge disjoint prefixes / buckets with fail-fast validation |
 | [express-zip-response.ts](express-zip-response.ts)                       | `node:http` — ZIP as attachment + `suggestedCacheControlForArchiveDownload`                                                  |
 | [run-multipart-to-s3.ts](run-multipart-to-s3.ts)                         | `runFolderArchiveToS3` — stream archive to destination object (needs `@aws-sdk/lib-storage`)                                 |

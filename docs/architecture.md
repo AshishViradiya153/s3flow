@@ -4,8 +4,8 @@
 
 s3prefix-archive implements a **streaming data plane**:
 
-1. **Discover objects** — `ListObjectsV2` (or merged roots, prepared NDJSON, or injected `StorageProvider.listObjects`).
-2. **Filter & schedule** — glob / size / optional `predicate`; optional checkpoint skip; optional dedupe and `deltaBaseline`.
+1. **Discover objects** — `ListObjectsV2` (or merged roots, prepared NDJSON, or injected `StorageProvider.listObjects`). You are **not** required to archive “everything under a prefix”: a prepared index or custom `StorageProvider` can supply **any object sequence your app defines** ([curated archives guide](guides/curated-archives-custom-paths.md)).
+2. **Filter & schedule** — glob / size / optional `predicate`; optional checkpoint skip; optional dedupe and `deltaBaseline`. **Archive entry paths** are resolved separately via default strip rules, **`mapEntryName`**, or **`entryMappings`** so ZIP layout can differ from raw keys.
 3. **GetObject** — byte streams with retries, optional MD5 verify, optional transforms.
 4. **Encode** — ZIP (`yazl`) or tar / tar.gz (`tar-stream`), with format-specific concurrency rules.
 5. **Sink** — `Writable` (file, HTTP response, multipart upload body, discard sink for benchmarks).

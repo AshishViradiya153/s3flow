@@ -4,7 +4,7 @@
  *
  * Use when:
  * - IAM grants **`s3:GetObject`** on specific keys but not a broad **`s3:ListBucket`**, or
- * - Your org exposes an allowlist (database, entitlement API, ABAC) instead of listing S3.
+ * - Your application maintains an allowlist (database, API, ABAC) instead of listing S3.
  *
  * Each NDJSON line is `{"key":"...","size":n}` (optional `etag`, `lastModified`). Keys must start
  * with the same prefix as **`source`**. Prefer accurate **`size`** (e.g. from `HeadObject`) if you

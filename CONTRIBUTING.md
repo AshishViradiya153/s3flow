@@ -4,7 +4,7 @@ Thank you for helping improve s3prefix-archive. This document describes how to s
 
 ## Prerequisites
 
-- **Node.js** `>=20.19.0` (see `engines` in `package.json`).
+- **Node.js** `>= 20.19.0` (see `engines` in `package.json`).
 - **pnpm** `9.x` (see `packageManager` in `package.json`). If you use Corepack: `corepack enable` then `pnpm` will match the repo.
 
 ## Getting started

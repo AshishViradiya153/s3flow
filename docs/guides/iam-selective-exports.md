@@ -20,4 +20,4 @@ AWS IAM typically separates **`s3:ListBucket`** (often scoped with `Condition` o
 
 Use **`parseAdditionalListSources`** before enqueueing multi-root jobs so duplicate or primary-repeated URIs fail fast with **`INVALID_ADDITIONAL_SOURCES`**. For checkpoint resume, use **`assertAdditionalListSourcesMatchCheckpoint`** when building custom tooling.
 
-See the root README section [Selective files, multiple folders, and IAM](../../README.md#selective-files-multiple-folders-and-iam) for the summary table and links to examples.
+See the root README section [Selective files, multiple folders, and IAM](../../README.md#selective-files-multiple-folders-and-iam) for the summary table and links to examples. For **curated lists** and **custom entry paths** in the archive, see [Curated archives & custom paths](curated-archives-custom-paths.md).
